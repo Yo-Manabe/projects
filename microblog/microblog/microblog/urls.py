@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.contrib.auth.views import LoginView, LogoutView
+
 from blog.views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView
 
 # リクエスト -> ulr.py ->views -> テンプレート -> レスポンス -> ユーザー
@@ -28,4 +30,6 @@ urlpatterns = [
     path('create/', BlogCreateView.as_view(), name="create"),
     path('delete/<int:pk>', BlogDeleteView.as_view(),name="delete"),
     path('admin/', admin.site.urls),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
 ]

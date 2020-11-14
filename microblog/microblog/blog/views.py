@@ -1,3 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -17,11 +20,12 @@ class BlogListView (ListView):
 class BlogDetailView (DetailView):
     model = Blog
     
-class BlogCreateView (CreateView):
+class BlogCreateView (LoginRequiredMixin, CreateView):
     model = Blog
     form_class = BlogForm
     #fields = ["content"]
     success_url = reverse_lazy("index")
+    login_url = '/login'
     template_name = "blog/blog_create_form.html"
     
     def form_valid(self, form):
@@ -32,10 +36,11 @@ class BlogCreateView (CreateView):
         messages.error(self.request, "保存に失敗しました")
         return super().form_invalid(form)
     
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     form_class = BlogForm
     #fields = ["content",]
+    login_url = '/login'
     template_name = "blog/blog_update_form.html"
     
     def get_success_url(self):
@@ -51,7 +56,8 @@ class BlogUpdateView(UpdateView):
         messages.error(self.request, "更新できませんでした")
         return super().form_valid(form)
 
-class BlogDeleteView (DeleteView):
+class BlogDeleteView (LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy("index")
+    login_url = '/login'
     

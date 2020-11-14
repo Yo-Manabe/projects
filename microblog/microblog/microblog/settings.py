@@ -27,7 +27,7 @@ SECRET_KEY = '2vitc&)&x#^(m6#9da@s1haxfa*7n5x*8k8cw^@mn!(ns#lxp*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['51f03a62f02344e99a9da5bc14f5d9bd.vfs.cloud9.us-east-2.amazonaws.com']
+ALLOWED_HOSTS = ['18.221.188.206']
 
 
 # Application definition
@@ -126,3 +126,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.normpath(os.path.join(BASE_DIR, "assets")),
 )
+
+LOGIN_REDIRECT_URL = '/'
